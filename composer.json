@@ -1,0 +1,8 @@
+{
+  "name": "rashiku/colrow",
+  "autoload": {
+    "psr-0": {
+      "Colrow": "."
+    }
+  }
+}

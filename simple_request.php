@@ -13,6 +13,6 @@ ColrowClient::initialize(
   'シート1'
 );
 
-$response = ColrowClient::_request('GET');
+list($status_code, $response) = ColrowClient::_request('GET');
 
 echo json_encode($response);

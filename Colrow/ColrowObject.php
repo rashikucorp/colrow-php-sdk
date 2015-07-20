@@ -55,8 +55,11 @@ class ColrowObject
       $rows['id'] = $this->row_id;
     }
     $options = ['rows' => json_encode([$rows])];
-    $response = ColrowClient::_request('POST', $options);
-    return $this->_createObjectFromFeed($response['result']['feeds'][0]);
+    list($status_code, $response) = ColrowClient::_request('POST', $options);
+    if ($status_code === 200) {
+      return $this->_createObjectFromFeed($response['result']['feeds'][0]);
+    }
+    return null;
   }
 
   public function destroy()
@@ -65,8 +68,8 @@ class ColrowObject
       return false;
     }
     $options = ['row_id' => $this->row_id];
-    ColrowClient::_request('POST', $options);
-    return true;
+    list($status_code, $response) = ColrowClient::_request('POST', $options);
+    return ($status_code === 200);
   }
 
   public function toJson()

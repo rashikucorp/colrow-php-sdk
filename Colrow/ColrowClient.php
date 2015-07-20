@@ -4,8 +4,7 @@ namespace Colrow;
 
 final class ColrowClient
 {
-  // const HOST_NAME = 'https://col-row.appspot.com/api/spreadsheet';
-  const HOST_NAME = 'http://localhost:8094/api/spreadsheet';
+  const HOST_NAME = 'https://col-row.appspot.com/api/spreadsheet';
 
   private static $base_params;
 
@@ -36,7 +35,10 @@ final class ColrowClient
     }
     curl_setopt($rest, CURLOPT_HTTPHEADER, $headers);
     $response = curl_exec($rest);
-    $status = curl_getinfo($rest, CURLINFO_HTTP_CODE);
+    $status_code = curl_getinfo($rest, CURLINFO_HTTP_CODE);
+    if ($status_code !== 200) {
+      return [$status_code, null];
+    }
     $contentType = curl_getinfo($rest, CURLINFO_CONTENT_TYPE);
     if (curl_errno($rest)) {
       throw new ColrowException(curl_error($rest), curl_errno($rest));
@@ -48,7 +50,7 @@ final class ColrowClient
     $decoded = json_decode($response, true);
     if (isset($decoded['status'])) {
       if ($decoded['status'] === 200) {
-        return $decoded;
+        return [200, $decoded];
       } else if (isset($decoded['result']['reason'])) {
         throw new ColrowException($decoded['result']['reason'], -1);
       }

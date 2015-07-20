@@ -97,8 +97,11 @@ class ColrowQuery
     if (isset($options['where'])) {
       $options['where'] = json_encode($options['where']);
     }
-    $response = ColrowClient::_request('GET', $options);
-    return ColrowObject::_createObjectsFromFeeds($response['result']['feeds']);
+    list($status_code, $response) = ColrowClient::_request('GET', $options);
+    if ($status_code === 200) {
+      return ColrowObject::_createObjectsFromFeeds($response['result']['feeds']);
+    }
+    return [];
   }
 
   public function _getOptions()

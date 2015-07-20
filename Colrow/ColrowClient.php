@@ -58,7 +58,6 @@ final class ColrowClient
     }
     $params = !empty($data) ? array_merge(self::$base_params, $data) : self::$base_params;
     $params['mode'] = 'sdk';
-    $headers = array();
     $url = self::HOST_NAME;
     if ($method === 'GET') {
       $url = $url . '?' . http_build_query($params);
@@ -70,7 +69,6 @@ final class ColrowClient
       curl_setopt($rest, CURLOPT_POST, 1);
       curl_setopt($rest, CURLOPT_POSTFIELDS, http_build_query($params));
     }
-    curl_setopt($rest, CURLOPT_HTTPHEADER, $headers);
     $response = curl_exec($rest);
     $status_code = curl_getinfo($rest, CURLINFO_HTTP_CODE);
     if ($status_code !== 200) {

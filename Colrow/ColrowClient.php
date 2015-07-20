@@ -32,11 +32,13 @@ final class ColrowClient
    */
   public static function initialize($user, $key, $sheet)
   {
-    self::$base_params = [
-      'user' => $user,
-      'key' => $key,
-      'sheet' => $sheet
-    ];
+    if ($user && $key && $sheet) {
+      self::$base_params = [
+        'user' => $user,
+        'key' => $key,
+        'sheet' => $sheet
+      ];
+    }
   }
 
   /**
@@ -51,6 +53,9 @@ final class ColrowClient
    */
   public static function _request($method, $data = null)
   {
+    if (!self::$base_params) {
+      throw new \Exception('You must call ColrowClient::initialize() before making any requests.');
+    }
     $params = !empty($data) ? array_merge(self::$base_params, $data) : self::$base_params;
     $params['mode'] = 'sdk';
     $headers = array();

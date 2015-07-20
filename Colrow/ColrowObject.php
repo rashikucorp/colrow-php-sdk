@@ -10,10 +10,7 @@ class ColrowObject
   public function __construct($row_id = null)
   {
     $this->data = [];
-    if ($row_id) {
-      $this->row_id = $row_id;
-    }
-    return $this;
+    $this->row_id = $row_id;
   }
 
   public function getId()
@@ -28,11 +25,17 @@ class ColrowObject
         return $data['value'];
       }
     }
-    return null;
+    return;
   }
 
   public function set($key, $value)
   {
+    if (!$key) {
+      throw new Exception('key may not be null.');
+    }
+    if (is_array($value)) {
+      throw new Exception('value may not be array.');
+    }
     $label_exists = false;
     foreach ($this->data as $index => $data) {
       if (isset($data['label']) && $data['label'] == $key) {
@@ -44,7 +47,6 @@ class ColrowObject
     if (!$label_exists) {
       $this->data[] = ['label' => $key, 'value' => $value];
     }
-    return $this;
   }
 
   public function save()
@@ -59,7 +61,7 @@ class ColrowObject
     if ($status_code === 200) {
       return $this->_createObjectFromFeed($response['result']['feeds'][0]);
     }
-    return null;
+    return;
   }
 
   public function destroy()

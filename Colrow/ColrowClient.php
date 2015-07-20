@@ -6,7 +6,7 @@ final class ColrowClient
 {
   const HOST_NAME = 'https://col-row.appspot.com/api/spreadsheet';
 
-  private static $base_params;
+  private static $base_params = [];
 
   public static function initialize($user, $key, $sheet)
   {

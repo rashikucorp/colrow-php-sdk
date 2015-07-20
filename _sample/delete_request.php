@@ -3,7 +3,7 @@
 ini_set('display_errors', '1');
 ini_set('error_reporting', E_ALL);
 
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
 use Colrow\ColrowClient;
 use Colrow\ColrowObject;
@@ -18,10 +18,8 @@ ColrowClient::initialize(
 $query = new ColrowQuery();
 
 $objects = $query->find();
-$row = $objects[0];
+$row = end($objects);
 
-$row->set('名称', 'ほげほげーん');
-$row->set('番号', 'イチ');
-
-$object = $row->save();
-echo $object->toJson();
+if ($row->destroy()) {
+  echo 'OK';
+}

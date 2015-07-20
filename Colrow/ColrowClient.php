@@ -24,8 +24,8 @@ final class ColrowClient
   /**
    * ColrowClient::initialize, must be called before using Colrow features.
    *
-   * @param string $user Account for Colrow API Call.
-   * @param string $key Spreadsheet key.
+   * @param string $user  Account for Colrow API Call.
+   * @param string $key   Spreadsheet key.
    * @param string $sheet Worksheet title.
    *
    * @return null
@@ -44,12 +44,12 @@ final class ColrowClient
   /**
    * ColrowClient::_request, internal method for communicating with Colrow.
    *
-   * @param string $method HTTP Method for this request.
-   * @param null $data Data to provide with the request.
+   * @param string $method  HTTP Method for this request.
+   * @param null $data      Data to provide with the request.
    *
    * @throws \Exception
    *
-   * @return array Status code(int) and Result(array|null) from Colrow API Call.
+   * @return array          Status code and Result from Colrow API Call.
    */
   public static function _request($method, $data = null)
   {
@@ -80,7 +80,7 @@ final class ColrowClient
     }
     curl_close($rest);
     if (strpos($contentType, 'text/html') !== false) {
-      throw new ColrowException('Bad Request', -1);
+      throw new ColrowException('Bad Request.', -1);
     }
     $decoded = json_decode($response, true);
     if (isset($decoded['status'])) {
@@ -90,6 +90,6 @@ final class ColrowClient
         throw new ColrowException($decoded['result']['reason'], -1);
       }
     }
-    throw new ColrowException('Bad Request', -1);
+    throw new ColrowException('Bad Request.', -1);
   }
 }

@@ -2,10 +2,31 @@
 
 namespace Colrow;
 
+/**
+ * ColrowClient - Class for comminicating with Google Drive.
+ *
+ * @author Somin Kobayashi <somin@rashikucorp.com>
+ */
 class ColrowDrive
 {
+  /**
+   * Constant for the API Server Host Address.
+   */
   const HOST_NAME = 'https://col-row.appspot.com/api/v1/drive';
 
+  /**
+   * ColrowDrive::upload, internal method for uploading to Google Drive.
+   *
+   * @param string $user      Account for Colrow API Call.
+   * @param string $filename  Name of the file.
+   * @param string $mimetype  Mime type of the body.
+   * @param string $body      Bytes of body content.
+   * @param string $parent_id Unique ID of a parent folder.
+   *
+   * @throws \Exception
+   *
+   * @return array|null       Result from Colrow API Call.
+   */
   public static function upload($user, $filename, $mimetype, $body, $parent_id)
   {
     if (func_num_args() !== 5) {

@@ -47,7 +47,7 @@ class ColrowObject
   /**
    * Get current value for an object property.
    *
-   * @param string $key Key to retrieve from the estimatedData array.
+   * @param string $key   Key to retrieve from the estimatedData array.
    *
    * @return mixed
    */
@@ -64,8 +64,8 @@ class ColrowObject
   /**
    * Set a value for an object key.
    *
-   * @param string $key Key to set a value for on the object.
-   * @param mixed $value Value to set on the key.
+   * @param string $key   Key to set a value for on the object.
+   * @param mixed $value  Value to set on the key.
    *
    * @throws Exception
    *
@@ -155,7 +155,7 @@ class ColrowObject
   /**
    * Create the objects from the entry feeds.
    *
-   * @param array $feeds entry feeds.
+   * @param array $feeds  Entry feeds.
    *
    * @return array
    */
@@ -171,7 +171,7 @@ class ColrowObject
   /**
    * Create the object from the entry feed.
    *
-   * @param array $feed each feed of entry feeds.
+   * @param array $feed   Each feed of entry feeds.
    *
    * @return ColrowObject
    */

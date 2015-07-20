@@ -12,7 +12,7 @@ final class ColrowClient
   /**
    * Constant for the API Server Host Address.
    */
-  const HOST_NAME = 'https://col-row.appspot.com/api/spreadsheet';
+  const HOST_NAME = 'https://col-row.appspot.com/api/v1/spreadsheet';
 
   /**
    * Base parameters.

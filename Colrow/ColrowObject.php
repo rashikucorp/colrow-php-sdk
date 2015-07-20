@@ -2,22 +2,55 @@
 
 namespace Colrow;
 
+/**
+ * ColrowObject - Representation of an object stored on Colrow.
+ *
+ * @author Somin Kobayashi <somin@rashikucorp.com>
+ */
 class ColrowObject
 {
+  /**
+   * Estimated value.
+   *
+   * @var array
+   */
   private $data;
+
+  /**
+   * Unique identifier for row data from entry feeds of a spreadsheet.
+   *
+   * @var string
+   */
   private $row_id;
 
+  /**
+   * Create a Colrow Object.
+   *
+   * @param string $row_id
+   */
   public function __construct($row_id = null)
   {
     $this->data = [];
     $this->row_id = $row_id;
   }
 
+  /**
+   * Get rowId for an object property.
+   *
+   * @return string
+   */
   public function getId()
   {
     return $this->row_id;
   }
 
+  /**
+   * Get current value for an object property.
+   *
+   * @param string $key Key to retrieve from the estimatedData array.
+   *
+   * @return mixed
+   */
   public function get($key)
   {
     foreach ($this->data as $data) {
@@ -28,6 +61,16 @@ class ColrowObject
     return;
   }
 
+  /**
+   * Set a value for an object key.
+   *
+   * @param string $key Key to set a value for on the object.
+   * @param mixed $value Value to set on the key.
+   *
+   * @throws Exception
+   *
+   * @return null
+   */
   public function set($key, $value)
   {
     if (!$key) {
@@ -49,6 +92,11 @@ class ColrowObject
     }
   }
 
+  /**
+   * Save Object to Parse.
+   *
+   * @return ColrowObject|null
+   */
   public function save()
   {
     $converted = $this->_convertData($this->data);
@@ -64,6 +112,11 @@ class ColrowObject
     return;
   }
 
+  /**
+   * Delete the row and the object.
+   *
+   * @return bool
+   */
   public function destroy()
   {
     if (!$this->row_id) {
@@ -74,6 +127,11 @@ class ColrowObject
     return ($status_code === 200);
   }
 
+  /**
+   * for debug...
+   *
+   * @return string
+   */
   public function toJson()
   {
     return json_encode($this->data);
@@ -94,6 +152,13 @@ class ColrowObject
     return $this;
   }
 
+  /**
+   * Create the objects from the entry feeds.
+   *
+   * @param array $feeds entry feeds.
+   *
+   * @return array
+   */
   public static function _createObjectsFromFeeds($feeds)
   {
     $objects = [];
@@ -103,6 +168,13 @@ class ColrowObject
     return $objects;
   }
 
+  /**
+   * Create the object from the entry feed.
+   *
+   * @param array $feed each feed of entry feeds.
+   *
+   * @return ColrowObject
+   */
   public static function _createObjectFromFeed($feed)
   {
     $object = new ColrowObject($feed['row_id']);

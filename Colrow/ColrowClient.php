@@ -2,12 +2,34 @@
 
 namespace Colrow;
 
+/**
+ * ColrowClient - Main class for Colrow initialization and communication.
+ *
+ * @author Somin Kobayashi <somin@rashikucorp.com>
+ */
 final class ColrowClient
 {
+  /**
+   * Constant for the API Server Host Address.
+   */
   const HOST_NAME = 'https://col-row.appspot.com/api/spreadsheet';
 
+  /**
+   * Base parameters.
+   *
+   * @var array
+   */
   private static $base_params = [];
 
+  /**
+   * ColrowClient::initialize, must be called before using Colrow features.
+   *
+   * @param string $user Account for Colrow API Call.
+   * @param string $key Spreadsheet key.
+   * @param string $sheet Worksheet title.
+   *
+   * @return null
+   */
   public static function initialize($user, $key, $sheet)
   {
     self::$base_params = [
@@ -17,6 +39,16 @@ final class ColrowClient
     ];
   }
 
+  /**
+   * ColrowClient::_request, internal method for communicating with Colrow.
+   *
+   * @param string $method HTTP Method for this request.
+   * @param null $data Data to provide with the request.
+   *
+   * @throws \Exception
+   *
+   * @return array Status code(int) and Result(array|null) from Colrow API Call.
+   */
   public static function _request($method, $data = null)
   {
     $params = !empty($data) ? array_merge(self::$base_params, $data) : self::$base_params;

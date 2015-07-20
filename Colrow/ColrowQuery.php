@@ -2,12 +2,46 @@
 
 namespace Colrow;
 
+/**
+ * ColrowQuery - Handles querying data from Colrow.
+ *
+ * @author Somin Kobayashi <somin@rashikucorp.com>
+ */
 class ColrowQuery
 {
+  /**
+   * Where constraints.
+   *
+   * @var array
+   */
   private $where = [];
+
+  /**
+   * Order By keys.
+   *
+   * @var string
+   */
   private $orderby;
+
+  /**
+   * Set the query orderBy to descending if this value is true.
+   *
+   * @var bool
+   */
   private $reverse;
+
+  /**
+   * Offset from the beginning of the search results.
+   *
+   * @var int
+   */
   private $offset;
+
+  /**
+   * Limit of results.
+   *
+   * @var int
+   */
   private $limit;
 
   public function equalTo($key, $value)

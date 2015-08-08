@@ -91,6 +91,18 @@ class ColrowQuery
     return $this;
   }
 
+  public function exists($key)
+  {
+    $this->addCondition($key, '<>', '');
+    return $this;
+  }
+
+  public function doesNotExist($key)
+  {
+    $this->addCondition($key, '=', '');
+    return $this;
+  }
+
   public function orQuery()
   {
     $array = [];
@@ -136,6 +148,20 @@ class ColrowQuery
       return ColrowObject::_createObjectsFromFeeds($response['result']['feeds']);
     }
     return [];
+  }
+
+  public function first()
+  {
+    $objects = $this->find();
+    if (count($objects)) {
+      return $objects[0];
+    }
+    return null;
+  }
+
+  public function count()
+  {
+    return count($this->find());
   }
 
   public function _getOptions()

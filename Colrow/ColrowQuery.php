@@ -143,11 +143,8 @@ class ColrowQuery
     if (isset($options['where'])) {
       $options['where'] = json_encode($options['where']);
     }
-    list($status_code, $response) = ColrowClient::_request('GET', $options);
-    if ($status_code === 200) {
-      return ColrowObject::_createObjectsFromFeeds($response['result']['feeds']);
-    }
-    return [];
+    $response = ColrowClient::_request('GET', $options);
+    return ColrowObject::_createObjectsFromFeeds($response['result']['feeds']);
   }
 
   public function first()

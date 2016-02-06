@@ -85,7 +85,7 @@ final class ColrowClient
     $decoded = json_decode($response, true);
     if (isset($decoded['status'])) {
       if ($decoded['status'] === 200) {
-        return [200, $decoded];
+        return $decoded;
       } else if (isset($decoded['result']['reason'])) {
         throw new ColrowException($decoded['result']['reason'], -1);
       }

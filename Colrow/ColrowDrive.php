@@ -12,7 +12,7 @@ class ColrowDrive
   /**
    * Constant for the API Server Host Address.
    */
-  const HOST_NAME = 'https://col-row.appspot.com/api/v1/drive';
+  const HOST_NAME = 'https://app.colrow.net/api/v1/drive';
 
   /**
    * ColrowDrive::upload, internal method for uploading to Google Drive.

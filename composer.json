@@ -1,5 +1,5 @@
 {
-  "name": "rashiku/colrow",
+  "name": "rashiku/colrow-php-sdk",
   "autoload": {
     "psr-0": {
       "Colrow": "."

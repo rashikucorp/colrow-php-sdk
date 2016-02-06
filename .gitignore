@@ -1,6 +1,6 @@
 *.sublime-project
 *.sublime-workspace
 sample/
-vender/
+vendor/
 composer.lock
 composer.phar

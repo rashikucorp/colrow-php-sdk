@@ -12,7 +12,15 @@ COLROW PHP SDK は、PHP 環境にて [COLROW](http://colrow.net/) API を利用
 ```
 以下のように記述することで COLROW PHP SDK が利用できるようになります。
 ```
-require 'vendor/autoload.php';
+require_once 'vendor/autoload.php';
+```
+何らかの事情で Composer が使えない場合は、[ファイル一式](https://github.com/rashikucorp/colrow-php-sdk/releases)をダウンロードし、Colrow フォルダをそのままお使いください。上記の autoload.php の代わりに以下のように記述し、必要なファイル群を読み込んでください。
+```
+require_once 'Colrow/ColrowClient.php';
+require_once 'Colrow/ColrowObject.php';
+require_once 'Colrow/ColrowQuery.php';
+require_once 'Colrow/ColrowDrive.php';
+require_once 'Colrow/ColrowException.php';
 ```
 ※PHP のバージョンは 5.4 以上である必要があります。
 
